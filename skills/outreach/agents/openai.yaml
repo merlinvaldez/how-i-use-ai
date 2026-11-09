@@ -1,0 +1,4 @@
+interface:
+  display_name: "Outreach"
+  short_description: "Draft CRM outreach from stages and email history"
+  default_prompt: "Use $outreach to review the selected CRM leads and draft appropriate follow-ups from their email conversations."

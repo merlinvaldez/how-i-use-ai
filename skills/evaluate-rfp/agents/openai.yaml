@@ -1,0 +1,4 @@
+interface:
+  display_name: "Evaluate RFP"
+  short_description: "Decide whether to bid and at what price"
+  default_prompt: "Use $evaluate-rfp to decide whether I should bid on this opportunity and recommend an evidence-backed approach and budget."

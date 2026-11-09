@@ -1,0 +1,4 @@
+interface:
+  display_name: "Question"
+  short_description: "Beginner-friendly answers about codebase or pasted code."
+  default_prompt: "Use $question to explain code questions clearly for beginners with grounded, context-aware walkthroughs."

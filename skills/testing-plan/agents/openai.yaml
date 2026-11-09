@@ -1,0 +1,4 @@
+interface:
+  display_name: "Testing Plan"
+  short_description: "Beginner-friendly plans with runnable test steps"
+  default_prompt: "Use $testing-plan to compare my branch against main and make a beginner-friendly plan with copyable commands or exact steps for every check."

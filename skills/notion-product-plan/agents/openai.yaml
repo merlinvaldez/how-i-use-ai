@@ -1,0 +1,4 @@
+interface:
+  display_name: "Notion Product Plan"
+  short_description: "Turn product ideas into Notion docs"
+  default_prompt: "Use $notion-product-plan to turn this product idea into a Notion brief and matching repo README."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Branch Doc Sync"
+  short_description: "Refresh README and env docs from git diff"
+  default_prompt: "Use $branch-doc-sync to compare my current branch against main and update the README plus example env files."

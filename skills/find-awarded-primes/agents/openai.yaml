@@ -1,0 +1,4 @@
+interface:
+  display_name: "Find Awarded Primes"
+  short_description: "Find awardees and select subcontracting CRM leads"
+  default_prompt: "Use $find-awarded-primes to research active awardees for this contract, find subcontracting contacts, and let me select leads to add to my Notion Sales CRM."

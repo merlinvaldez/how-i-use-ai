@@ -1,0 +1,4 @@
+interface:
+  display_name: "Implement"
+  short_description: "Implement the agreed solution and say how to verify it"
+  default_prompt: "Use $implement to recover the agreed implementation plan from this conversation, apply it to the codebase, and tell me exactly how to verify the result."

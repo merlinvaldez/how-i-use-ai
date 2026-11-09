@@ -1,0 +1,4 @@
+interface:
+  display_name: "Teach Me"
+  short_description: "Learn code end to end with a Scrimba explainer"
+  default_prompt: "Use $teach-me to explain this codebase feature and my planned changes with a Scrimba video, a complete novice-friendly explanation, key code samples, and documentation."

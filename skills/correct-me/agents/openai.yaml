@@ -1,0 +1,4 @@
+interface:
+  display_name: "Correct Me"
+  short_description: "Review code and coach minimal fixes."
+  default_prompt: "Use $correct-me to review my code or approach, identify mistakes precisely, and coach minimal fixes without editing files."

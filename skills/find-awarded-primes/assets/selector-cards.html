@@ -1,0 +1,67 @@
+<div id="ROOT_ID">
+<style>
+#ROOT_ID [hidden]{display:none!important}
+#ROOT_ID .topline{display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap;margin:24px 0 16px}
+#ROOT_ID .vendors{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-bottom:24px}
+#ROOT_ID .vendor-inner{display:flex;flex-direction:column;gap:14px;height:100%;min-width:0;overflow-wrap:anywhere}
+#ROOT_ID .name-row{display:flex;justify-content:space-between;gap:12px;align-items:start;min-height:44px}
+#ROOT_ID .name-row h3{margin:0}
+#ROOT_ID .amount h2{margin:0}
+#ROOT_ID .copy{display:grid;gap:12px}
+#ROOT_ID .source-links{display:flex;gap:8px 16px;flex-wrap:wrap;margin-top:auto;padding-top:8px}
+#ROOT_ID .tray-top{display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap}
+#ROOT_ID .tray-content{display:grid;gap:16px;overflow-wrap:anywhere}
+#ROOT_ID .tray-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+#ROOT_ID .additional{margin:24px 0}
+#ROOT_ID .additional summary{margin-bottom:16px}
+#ROOT_ID .notes{margin-top:24px}
+#ROOT_ID .notes p{overflow-wrap:anywhere}
+#ROOT_ID .status-line{margin:12px 0}
+@media(max-width:580px){#ROOT_ID .vendors{grid-template-columns:1fr}}
+</style>
+<h2>REPORT_TITLE</h2>
+<div class="text-small">REPORT_SUBTITLE</div>
+<div class="topline"><h3>Select subcontracting leads</h3><label class="form-check"><input class="form-check-input" type="checkbox" data-all><span class="form-check-label">Select all active vendors</span></label></div>
+<div class="vendors" data-active></div>
+<details class="additional"><summary class="cursor-interaction">Historical vendors - contract renewal unverified</summary><div class="vendors" data-fitness></div></details>
+<details class="additional"><summary class="cursor-interaction">Unconfirmed or future awards</summary><div class="vendors" data-proposed></div></details>
+
+<section class="card" aria-label="Notion Sales CRM selection"><div class="tray-content"><div class="tray-top"><div><div class="text-small">Notion Sales CRM</div><h3 data-count>0 vendors selected</h3></div><button class="btn btn-ghost" type="button" data-clear>Clear</button></div><div data-names>No vendors selected.</div><div class="tray-actions"><button class="btn btn-primary" type="button" data-submit disabled>Add selected leads to Notion</button></div><div class="text-small">Selecting vendors does not change your CRM until you submit the selection. No outreach will be sent.</div></div></section>
+<div data-status class="status-line" role="status"></div><label class="form-label" data-fallback-label hidden>Copy your selection request into chat<textarea class="form-control" data-fallback readonly rows="5"></textarea></label>
+<section class="notes"><h3>Sources &amp; coverage</h3><p>Prime agreement amounts are not guaranteed spending or available subcontract budgets. Suggested opportunities are fit assessments, not confirmed openings.</p><p data-crm-note></p><details><summary class="cursor-interaction">Full research coverage</summary><p data-coverage></p></details></section>
+</div>
+<script>
+(()=>{
+const root=document.getElementById('ROOT_ID'),data=MANIFEST_DATA,manifest=MANIFEST_PATH;
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const shortMoney=n=>n>=1000000?'$'+(n/1000000).toFixed(1).replace(/\.0$/,'')+'M':'$'+(n/1000).toLocaleString('en-US',{maximumFractionDigits:2})+'K';
+const dateLabel=s=>{const [y,m]=s.split('-');return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][Number(m)-1]+' '+y};
+for(const p of data.prospects){
+ const a=p.evidence?.award||{},x={scope:p.documented_services},s={award:p.awarded_scope,opportunity:p.opportunity,note:p.selection_note};
+ const active=p.activity.startsWith('Active'),ended=/ended|closed/i.test(p.activity),proposed=p.activity.toLowerCase().includes('proposed');
+ const amount=typeof a.amount_usd==='number'?shortMoney(a.amount_usd):'Amount unverified';
+ const dates=a.start&&a.end?dateLabel(a.start)+' - '+dateLabel(a.end):(p.dates||'Dates unverified');
+ const target=active?'[data-active]':ended?'[data-fitness]':'[data-proposed]';
+ const services=p.sources.find(t=>/program|service|model|organization|focus/i.test(t.label)&&!t.url.includes('checkbook'))||p.sources.find(t=>t.label==='Public business contact');
+ const contact=(p.email?esc(p.email):p.channel==='Official contact page'?'Official contact form':'Contact not verified')+(p.phone?' | '+esc(p.phone):'');
+ const box=document.createElement('article');box.className='card';
+ box.innerHTML='<div class="vendor-inner"><div class="name-row"><h3>'+esc(p.company)+'</h3><label class="form-check"><input class="form-check-input" type="checkbox" value="'+esc(p.id)+'" aria-label="Select '+esc(p.company)+'"><span class="sr-only">Select '+esc(p.company)+'</span></label></div><div class="amount"><h2 class="tabular-nums">'+amount+'</h2><div>'+esc(dates)+'</div>'+(active?'':'<div class="text-small">'+esc(p.activity)+'</div>')+'</div><div class="copy"><div><strong>'+esc(proposed?'Proposed scope:':'Awarded:')+'</strong> '+esc(s.award)+'</div><div><strong>Documented services:</strong> '+esc(x.scope)+'</div><div><strong>Potential opportunity:</strong> '+esc(s.opportunity)+'</div><div><strong>Before pursuing:</strong> '+esc(s.note)+'</div><div><strong>Published contact:</strong> '+contact+'</div></div><div class="source-links">'+(services?'<a href="'+esc(services.url)+'" target="_blank" rel="noopener noreferrer">Vendor services</a>':'')+'<a href="'+esc(p.sources[0]?.url||'#')+'" target="_blank" rel="noopener noreferrer">'+(proposed?'DOE agenda':'Contract record')+'</a></div></div>';
+ root.querySelector(target).append(box);
+}
+root.querySelector('[data-coverage]').textContent=data.coverage||'Coverage not recorded';
+root.querySelector('[data-crm-note]').textContent=data.crm_summary||'CRM duplicates not checked. No import performed.';
+root.querySelectorAll('.additional').forEach(e=>{if(!e.querySelector('article'))e.hidden=true;});
+if(!root.querySelector('[data-active] article'))root.querySelector('[data-active]').textContent='No verified active awards found.';
+const boxes=[...root.querySelectorAll('input[value]')],all=root.querySelector('[data-all]'),submit=root.querySelector('[data-submit]'),status=root.querySelector('[data-status]'),fallback=root.querySelector('[data-fallback]'),fallbackLabel=root.querySelector('[data-fallback-label]');
+const activeIds=data.prospects.filter(p=>p.activity.startsWith('Active')).map(p=>p.id);
+const ids=()=>boxes.filter(b=>b.checked).map(b=>b.value);
+function update(){const selected=ids(),n=selected.length;root.querySelector('[data-count]').textContent=n+' of '+data.prospects.length+' vendors selected';root.querySelector('[data-names]').textContent=n?data.prospects.filter(p=>selected.includes(p.id)).map(p=>p.company).join(' · '):'No vendors selected.';submit.disabled=!n;submit.textContent=n?'Add '+n+' selected '+(n===1?'lead':'leads')+' to Notion':'Add selected leads to Notion';const k=activeIds.filter(i=>selected.includes(i)).length;all.checked=activeIds.length>0&&k===activeIds.length;all.indeterminate=k>0&&k<activeIds.length;all.disabled=!activeIds.length;}
+function save(){update();status.textContent='';fallbackLabel.hidden=true;try{Promise.resolve(window.openai?.setWidgetState?.({modelContent:{run_id:data.run_id,selected_ids:ids()},privateContent:null})).catch(()=>{});}catch{}}
+function restore(s){if(s?.run_id!==data.run_id||!Array.isArray(s.selected_ids))return;boxes.forEach(b=>b.checked=s.selected_ids.includes(b.value));update();}
+update();restore(window.openai?.widgetState?.modelContent);window.addEventListener('openai:set_globals',e=>restore(e.detail?.globals?.widgetState?.modelContent));
+boxes.forEach(b=>b.addEventListener('change',save));
+all.addEventListener('change',()=>{boxes.filter(b=>activeIds.includes(b.value)).forEach(b=>b.checked=all.checked);save();});
+root.querySelector('[data-clear]').addEventListener('click',()=>{boxes.forEach(b=>b.checked=false);save();});
+submit.addEventListener('click',async()=>{const selection=ids();if(!selection.length)return;const prompt='Use $find-awarded-primes to add ONLY these selected prospects to my Notion Sales CRM. Run ID: '+JSON.stringify(data.run_id)+'. Evidence manifest: '+JSON.stringify(manifest)+'. Selected prospect IDs: '+JSON.stringify(selection)+'. Validate the manifest, check duplicates, preserve source-backed details and distinguish suggested opportunities from confirmed needs, save and verify each record. Do not send outreach.';submit.disabled=true;try{if(typeof window.openai?.sendFollowUpMessage!=='function')throw new Error('Unavailable');await window.openai.sendFollowUpMessage({prompt,title:'Add '+selection.length+' selected leads to Notion'});status.textContent='Selection submitted. Saved leads will be confirmed in chat.';}catch{fallback.value=prompt;fallbackLabel.hidden=false;status.textContent='No import submitted. Copy the request below into chat.';}finally{update();}});
+})();
+</script>

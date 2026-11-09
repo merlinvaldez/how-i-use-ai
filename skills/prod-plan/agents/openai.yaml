@@ -1,0 +1,4 @@
+interface:
+  display_name: "Prod Plan"
+  short_description: "Beginner-friendly rollout steps with verification"
+  default_prompt: "Use $prod-plan to guide me through a beginner-friendly production rollout with exact steps and verification for every task. Do not make production changes for me."

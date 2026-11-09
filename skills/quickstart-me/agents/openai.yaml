@@ -1,0 +1,4 @@
+interface:
+  display_name: "Quickstart Me"
+  short_description: "Generate beginner mini-project quickstarts and save them as markdown files."
+  default_prompt: "Use $quickstart-me to create a complete beginner mini-project quickstart, save it as a markdown file in the workspace, and return only the file path in chat."
