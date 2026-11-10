@@ -26,7 +26,7 @@ When I want to repeat a workflow, I write down how I want the agent to approach 
 
 **In practice · Deploying the VoteFeed Senate feed**
 
-I created a user story and tickets in Notion, then used `spec` to make a plan for each ticket and `implement` to code it step by step. After each step, I tested the expected behavior by hand before committing the code.
+I create a user story and tickets in Notion, then use `spec` to make a plan for each ticket and `implement` to code it step by step. After each step, I test the expected behavior by hand before committing the code.
 
 | When I want to… | I use… |
 | :--- | :--- |
