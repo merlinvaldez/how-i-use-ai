@@ -2,13 +2,13 @@
 
 **I use AI to grow my capacity while keeping the parts of the work that help me think and learn.**
 
-This repo is an open look at how I use AI harnesses, skills, plugins, and MCPs as an entrepreneur, software engineer, learner, and inventor. If a skill or workflow here is useful to you, feel free to copy it and ask your agent of choice to install it.
+This repo is an open look at how I use AI agent environments, skills, plugins, and MCPs as an entrepreneur, software engineer, learner, and inventor. If a skill or workflow here is useful to you, feel free to copy it and ask your agent of choice to install it.
 
-| [01 · Harnesses](#01--harnesses) | [02 · Skills](#02--skills) | [03 · Plugins & MCPs](#03--plugins--mcps) |
+| [01 · Agent Environments](#01--agent-environments) | [02 · Skills](#02--skills) | [03 · Plugins & MCPs](#03--plugins--mcps) |
 | :--- | :--- | :--- |
 | The applications I use for agentic AI work. | The repeatable processes I’ve set up to increase my capacity. | My work and context live across apps. These are the ones I’ve connected to my agents. |
 
-## 01 · Harnesses
+## 01 · Agent Environments
 
 ### Codex in VS Code
 
