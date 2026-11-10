@@ -6,7 +6,7 @@ This repo is an open look at how I use AI harnesses, skills, plugins, and MCPs a
 
 | [01 · Harnesses](#01--harnesses) | [02 · Skills](#02--skills) | [03 · Plugins & MCPs](#03--plugins--mcps) |
 | :--- | :--- | :--- |
-| Where I work | How I work | What I connect |
+| The applications I use for agentic AI work. | The repeatable processes I’ve set up to increase my capacity. | My work and context live across apps. These are the ones I’ve connected to my agents. |
 
 ## 01 · Harnesses
 
