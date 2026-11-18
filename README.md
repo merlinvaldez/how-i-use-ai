@@ -10,6 +10,14 @@ This repo is an open look at how I use AI agent environments, skills, plugins, a
 
 ## 01 · Agent Environments
 
+### Codex Desktop App
+
+I use the Codex desktop app as a workspace for longer tasks that span codebases and the other tools I use to run projects. I keep different projects in their own threads, use skills to give the agent a repeatable process, and review the plan and results before moving forward.
+
+**In practice · Working across code and connected apps**
+
+For projects like VoteFeed and Stringphone, I use Codex to investigate issues, turn requirements into implementation steps, make changes, and verify them against the code, database, and deployment. For Praxis Pública, I connect tools like Gmail, Notion, and Google Drive to research procurement opportunities, manage outreach, and prepare meeting materials. The desktop app brings those workflows together while I remain responsible for product decisions, testing, and approving what gets sent or shipped. [Codex desktop app](https://developers.openai.com/codex/app/)
+
 ### Codex in VS Code
 
 I use Codex alongside my codebase to inspect changes, write specs, and implement user story tickets step by step. [Codex IDE extension](https://developers.openai.com/codex/ide/)
